@@ -94,6 +94,7 @@ header{
     border-radius : 15px ;
     background-color: #eee;
     
+    
 
 }
 .controlbox:nth-of-type(1){
@@ -153,7 +154,7 @@ header{
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 1.1rem ;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
