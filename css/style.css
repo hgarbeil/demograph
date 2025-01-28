@@ -131,6 +131,17 @@ header{
     /* background-color:yellow ; */
 }
 
+.minmaxFields {
+  
+  padding: 20px ;
+  border : .2rem solid #338833ff ;
+  border-radius: 5px ;
+
+}
+.minmaxFields * {
+  width: 100px ;
+}
+
 .scaletitle {
     height: 50px ;
     width: 200px ;
