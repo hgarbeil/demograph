@@ -68,6 +68,14 @@
         </div>
         <div class="scalebar">
             <h3 id="scalebarTitle">Value : </h3>
+            <div>
+                <label for="fname">Minimum :</label>
+                <input type="number" id="minTF" name="fname" step=".01"><br><br>
+                <label for="lname">Maximum :</label>
+                <input type="number" id="maxTF" name="lname" step=".01"><br><br>
+                <input type="submit" value="Submit" onclick="setMinMax()">
+            </div>
+              
             <div class="scaleblock"></div>
             <div class="scaleblock"></div>
             <div class="scaleblock"></div>

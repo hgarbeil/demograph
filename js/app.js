@@ -1,5 +1,7 @@
 let map = null ;
 let zoomNum = 6 ;
+const minTF = document.getElementById("minTF") ;
+const maxTF = document.getElementById("maxTF") ;
 const titleString=['Election 2024','Unemployment','Median Property Tax','Percent Non-White','Population'] ;
 const dataCol = ['per_dem', 'unemp_rate', 'real_estate_taxes_med_2022','percent_nonwhite','TOT_POP'];
 const dataLabel = ['Fraction Dem','Percent Unemployed','Dollars','Percent','Population']
@@ -12,6 +14,8 @@ let dtype_num = 0 ;
 let townsObj =[] ;
 let townDataFlag = 0 ;
 
+
+
 let scalebarTitle = document.getElementById("scalebarTitle");
 
 // Esri color ramps - Blue and Red 2
@@ -21,6 +25,15 @@ const scaleblocks = document.querySelectorAll('.scaleblock');
 let rangeValues = [] ;
 let minmax = [] ;
  
+function setMinMax(){
+    let dnum = dtype_num ;
+    minmax=[Number(minTF.value),Number(maxTF.value)] ;
+    getParams(election, dataCol[dnum], false);
+    loadMap(minmax,dataCol[dnum], dnum) ;
+    console.log("setting: ",minmax, dnum) ;
+    loadScaleBlock (minmax,dnum) ;
+}
+
 function townsToggle (num) {
     townDataFlag = num ;
     loadMap(minmax, dtype,dtype_num);
@@ -30,10 +43,9 @@ function townsToggle (num) {
 
 
 function changeData(num){
-    console.log("change data", num);
     dtype = dataCol[num] ;
-    minmax = getParams(election,dtype);
-
+    minmax = getParams(election,dtype, true);
+    
     loadMap(minmax,dtype, num) ;
     loadScaleBlock (minmax,num) ;
     dtype_num = num ;
@@ -52,7 +64,6 @@ function loadMap (minmax, dval, index){
     }).addTo(map);
     if (townDataFlag != 2){
     readTowns('data/towns.csv') ;
-    console.log("cities flag is ", citiesFlag, "  ",townsObj.length) ;
     }
     
     L.geoJSON(statesData,{
@@ -164,21 +175,29 @@ function getColor (value,minmax){
 //               '#FF1010'; 
 //   }
 
-function getParams (election,dval) {
-    minval = 1.E9 ;
-    maxval = -1.E9 ;
-    console.log('hello');
-    for (let ival = 0; ival< election.features.length; ival++){
-        let val = election.features[ival].properties[dval] ;
-        if (val>maxval) maxval = val ;
-        if (val<minval) minval = val ;
+function getParams (election,dval,calcMinMax) {
+    if (calcMinMax){
+        minval = 1.E9 ;
+        maxval = -1.E9 ;
+        console.log('hello');
+        for (let ival = 0; ival< election.features.length; ival++){
+            let val = election.features[ival].properties[dval] ;
+            if (val>maxval) maxval = val ;
+            if (val<minval) minval = val ;
 
+        }
+    }
+    else {
+        minval = minmax[0] ;
+        maxval = minmax[1] ;
     }
     let nranges = 10 ;
     let xinc = (maxval - minval) / nranges ;
     for (let i=0; i<nranges; i++) {
         rangeValues [i] = (minval + i * xinc).toFixed(2) ;
     }
+    minTF.value=(minval.toFixed(2)) ;
+    maxTF.value=(maxval.toFixed(2)) ;
     return ([minval,maxval])
 }
 
@@ -196,16 +215,13 @@ function readTowns (townFile) {
             let town = { name:thisline[0] , lat:Number(thisline[1]), long:Number(thisline[2]), pop:thisline[3]};
             townsObj.push(town) ;
         }
-        console.log(townsObj) ;
         citiesFlag = true ;
         for (town of townsObj){
-                console.log (town.name) ;
                 let markerOptions = {
                     title: town.name ,
                     clickable: true ,
     
                 };
-                console.log("adding to map ",town.lat);
                 var marker = L.marker([town.lat,town.long],markerOptions).bindPopup(town.name+"<br>Population: "+town.pop).addTo(map) ;
                 
     
@@ -222,7 +238,7 @@ function readTowns (townFile) {
 
 
 
-minmax = getParams(election,'per_dem');
+minmax = getParams(election,'per_dem', true);
 
 loadMap(minmax,'per_dem', 0) ;
 loadScaleBlock (minmax,0) ;
