@@ -18,81 +18,85 @@
         <h1>Demographic Stuff</h1>
     </header>
     <div class="main">
-    <div class="mapcontrol">
-        <div class="controlbox datatype">
-            <h3>Data Layer</h3>
-            <label class="container">Percent Democrat
-            <input type="radio" checked="checked" name="radio" onclick="changeData(0)">
-            <span class="checkmark"></span>
-            </label>
-            <label class="container">Total Population
-                <input type="radio" name="radio" onclick="changeData(4)">
+        <div class="mapcontrol">
+            <div class="controlbox datatype">
+                <h3>Data Layer</h3>
+                <label class="container">Percent Democrat
+                <input type="radio" checked="checked" name="radio" onclick="changeData(0)">
                 <span class="checkmark"></span>
                 </label>
-            <label class="container">Percent Non-White
-                <input type="radio" name="radio" onclick="changeData(3)">
+                <label class="container">Total Population
+                    <input type="radio" name="radio" onclick="changeData(4)">
+                    <span class="checkmark"></span>
+                    </label>
+                <label class="container">Percent Non-White
+                    <input type="radio" name="radio" onclick="changeData(3)">
+                    <span class="checkmark"></span>
+                    </label>
+                <label class="container">Unemployment
+                <input type="radio" name="radio" onclick="changeData(1)">
                 <span class="checkmark"></span>
                 </label>
-            <label class="container">Unemployment
-            <input type="radio" name="radio" onclick="changeData(1)">
-            <span class="checkmark"></span>
-            </label>
-            <label class="container">Property Tax
-            <input type="radio" name="radio" onclick="changeData(2)">
-            <span class="checkmark"></span>
-            </label>
-        </div>
-        <div class="controlbox towncontrol">
-            <h3>Towns</h3>
-            <label class="container">Towns and Data
-            <input type="radio" checked="checked" name="radio1" onclick="townsToggle(0)">
-            <span class="checkmark"></span>
-            </label>
-            <label class="container">Towns only
-            <input type="radio" name="radio1" onclick="townsToggle(1)">
-            <span class="checkmark"></span>
-            </label>
-            <label class="container">Data only
-            <input type="radio" name="radio1" onclick="townsToggle(2)">
-            <span class="checkmark"></span>
-            </label>
-
-        </div>
-        
-    </div>
-    
-    <div class="map">
-        <div class="mapcolumn">
-            <h2 id="maptitle"></h2>
-            <div id='mapid' class="mapcontainer"></div>
-        </div>
-        <div class="scalebar">
-            <h3 id="scalebarTitle">Value : </h3>
-            <div class="minmaxFields">
-                <label for="fname">Minimum :</label>
-                <input type="number" id="minTF" name="fname" step=".01"><br><br>
-                <label for="lname">Maximum :</label>
-                <input type="number" id="maxTF" name="lname" step=".01"><br><br>
-                <input type="submit" value="Submit" onclick="setMinMax()">
+                <label class="container">Property Tax
+                <input type="radio" name="radio" onclick="changeData(2)">
+                <span class="checkmark"></span>
+                </label>
             </div>
-              
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-            <div class="scaleblock"></div>
-    
+            <div class="controlbox towncontrol">
+                <h3>Towns</h3>
+                <label class="container">Towns and Data
+                <input type="radio" checked="checked" name="radio1" onclick="townsToggle(0)">
+                <span class="checkmark"></span>
+                </label>
+                <label class="container">Towns only
+                <input type="radio" name="radio1" onclick="townsToggle(1)">
+                <span class="checkmark"></span>
+                </label>
+                <label class="container">Data only
+                <input type="radio" name="radio1" onclick="townsToggle(2)">
+                <span class="checkmark"></span>
+                </label>
+
+            </div>
             
         </div>
-
-    </div>
-    </div>
     
+        <div class="map">
+            <div class="mapcolumn">
+                <h2 id="maptitle"></h2>
+                <div id='mapid' class="mapcontainer"></div>
+            </div>
+        </div>
+        <div class="scalebar">
+                
+                <div class="minmaxFields">
+                    <h3 id="scalebarTitle">Value : </h3>
+                    <label for="fname">Minimum :</label>
+                    <input type="number" id="minTF" name="fname" step=".01"><br><br>
+                    <label for="lname">Maximum :</label>
+                    <input type="number" id="maxTF" name="lname" step=".01"><br><br>
+                    <input type="submit" value="Submit" onclick="setMinMax()">
+                </div>
+                <div class="scale">  
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                    <div class="scaleblock"></div>
+                </div>
+        
+                
+            </div>
+
+        </div>
+    </div>
+
+    </body>
 
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"></script>
     <script src="js/ajax-utils.js"></script>

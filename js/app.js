@@ -19,9 +19,12 @@ let townDataFlag = 0 ;
 let scalebarTitle = document.getElementById("scalebarTitle");
 
 // Esri color ramps - Blue and Red 2
-const colors = ["#ff1414ff", "#e61428FF", "#d21432FF", "#be1452ff", "#aa1468FF", 
-    "#961478FF", "#821496FF", "#6614aaff","#5214beff","#2814e6ff","#1414ffff"];
+const colors=["#999999ff", "#ff0000ff", "#ffa500ff", "#cccc00ff", "#00bb00ff",
+                "#00c8c8ff","#0000ffff", "#4b0082ff", "#ee82eeff","#ccccffff"] ;
+const rbcolors = ["#ff1414ff", "#e61428FF", "#d21432FF", "#be1452ff", "#aa1468FF", 
+    "#961478FF", "#821496FF", "#6614aaff","#2814e6ff", "#5214beff","#1414ffff"];
 const scaleblocks = document.querySelectorAll('.scaleblock');
+
 let rangeValues = [] ;
 let minmax = [] ;
  
@@ -108,20 +111,20 @@ function loadMap (minmax, dval, index){
 
 function loadScaleBlock (minmax,dnum) {
     let text = '' ;
-    for (var iblock=0; iblock<10; iblock++){
-        scaleblocks[iblock].style.backgroundColor=colors[iblock];
+    for (var iblock=1; iblock<11; iblock++){
+        scaleblocks[iblock].style.backgroundColor=colors[iblock-1];
         console.log("in scaleblock") ;
         if (dnum != 4)
         {
-        if (iblock==0){
-            text = `<= ${rangeValues[0]}` ;
+        if (iblock==1){
+            text = `<= ${rangeValues[1]}` ;
         }
         else {
             text = `${rangeValues[iblock-1]} - ${rangeValues[iblock]}`;
         }
         } else {
-            if (iblock==0){
-                let val = Math.round(rangeValues[0]);
+            if (iblock==1){
+                let val = Math.round(rangeValues[1]);
                 text = `<= ${val}` ;
             }
             else {
@@ -148,7 +151,7 @@ function getColor (value,minmax){
     if (ival > 9) ival = 9 ;
     ival = Math.round (ival) ;
     // console.log(ival+ "  :  "+colors[ival]);
-    return colors[ival] ;
+    return colors[ival+1] ;
     }
 
 
